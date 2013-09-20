@@ -14,12 +14,14 @@ class OAuth {
 	private $clientId;
 	private $clientSecret;
 	private $site;
+	private $redirectUri;
 
 	public function __construct(Application $app) {
 		$this->app = $app;
 
 		$this->clientId = $app['oauth.client.id'];
 		$this->clientSecret = $app['oauth.client.secret'];
+		$this->redirectUri = $this->app['oauth.redirecturi'];
 		$this->site = $app['oauth.site'];
 
 		$this->client = new OAuthClient(
@@ -31,7 +33,12 @@ class OAuth {
 
 	public function getAuthuri() {
 		return $this->client->authCode()->authorizeUrl(
-			array_merge(array('redirect_uri' => $this->app['oauth.redirecturi'],'scope'=>'flattr thing', array()))
+			array_merge(array('redirect_uri' => $this->redirectUri,'scope'=>'flattr thing', array()))
 		);
 	}
+
+	public function getAccessTokenByCode($code) {
+		return $this->client->authCode()->getToken($code, array('redirect_uri' => $this->redirectUri, 'parse'=>'json') );
+	}
+
 }

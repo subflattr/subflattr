@@ -23,5 +23,6 @@ $app->register(new Subflattr\Auth\OAuthServiceProvider(), array(
 
 
 $app->get('/', 'Subflattr\Controller\IndexController::foobar');
+$app->get('/oauth/', 'Subflattr\Controller\OAuthController::authorize');
 
 $app->run();
