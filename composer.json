@@ -3,7 +3,8 @@
         "silex/silex": "~1.0",
 	    "monolog/monolog": ">=1.0.0",
 	    "twig/twig": ">=1.8,<2.0-dev",
-	    "symfony/twig-bridge": "~2.3"
+	    "symfony/twig-bridge": "~2.3",
+	    "keeguon/oauth2-php": "1.2.2"
     },
 	"autoload": {
 		"psr-0": {

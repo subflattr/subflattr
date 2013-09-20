@@ -14,6 +14,8 @@ class IndexController
     {
 	    $app->log("You called /",[],Logger::INFO);
 
-        return $app->render('index/index.twig', ['name' => "Foobar"]);
+	    $oauth = $app->oauth();
+
+        return $app->render('index/index.twig', ['name' => $oauth->getAuthuri()]);
     }
 }
