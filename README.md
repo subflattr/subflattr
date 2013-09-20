@@ -12,13 +12,15 @@ Run `composer install` to install dependencies
 
 Go into `web` directory and run `php -S localhost:8080` and point your browser there (or install php server of your taste)
 
+What works
+----------
+Authentication against Flattr API and basic DB stuff
 
 Next?
 -----
 
-Not much done as for now. Simple code that runs foobar action and renders twig code.
+moar user stuff and a logged in dashboard (session handling)
 
-Next up OAuth2 login/registration
 
 Licence
 -------
