@@ -4,7 +4,8 @@
 	    "monolog/monolog": ">=1.0.0",
 	    "twig/twig": ">=1.8,<2.0-dev",
 	    "symfony/twig-bridge": "~2.3",
-	    "keeguon/oauth2-php": "1.2.2"
+	    "keeguon/oauth2-php": "1.2.2",
+	    "dflydev/doctrine-orm-service-provider": "1.0.2"
     },
 	"autoload": {
 		"psr-0": {
