@@ -1,4 +1,6 @@
 <?php
+use Dflydev\Silex\Provider\DoctrineOrm\DoctrineOrmServiceProvider;
+use Silex\Provider\DoctrineServiceProvider;
 use Subflattr\Application;
 
 require_once __DIR__.'/../vendor/autoload.php';
@@ -19,6 +21,24 @@ $app->register(new Subflattr\Auth\OAuthServiceProvider(), array(
 	'oauth.client.secret' => 'IZUND0f2cf9ICSTdRZ1oPIxyCj4JYVFxKqaehg6jm6RPPASwqKK6j8uLhok6aPuK',
 	'oauth.redirecturi' => 'http://subflattr.local:8080/oauth/',
 	'oauth.site' => 'https://flattr.com',
+));
+$app->register(new DoctrineServiceProvider, array(
+	"db.options" => array(
+		"driver" => "pdo_sqlite",
+		"path" => $basepath . "subflattr.db",
+	),
+));
+$app->register(new DoctrineOrmServiceProvider, array(
+	"orm.proxies_dir" => $basepath . "cache/proxies/",
+	"orm.em.options" => array(
+		"mappings" => array(
+			array(
+				"type" => "annotation",
+				"namespace" => 'Subflattr\Entity',
+				"path" => $basepath . 'src/Subflattr/Entity',
+			),
+		)
+	)
 ));
 
 
