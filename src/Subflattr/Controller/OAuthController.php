@@ -14,10 +14,11 @@ class OAuthController {
 		$token = $app->oauth()->getAccessTokenByCode($authCode);
 
 		$response = $token->get('https://api.flattr.com/rest/v2/user');
-		$app->log($response->body());
 
 		$user = new User();
 		$user->setUsername($response->parse()['username']);
+		$user->setNormalizedUsername(strtolower($response->parse()['username']));
+		$user->setToken($token->getToken());
 		$app->doctrine()->persist($user);
 		$app->doctrine()->flush();
 

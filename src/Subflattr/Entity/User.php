@@ -22,6 +22,16 @@ class User {
 	 */
 	protected $username;
 
+	/**
+	 * @Column(type="string", length=30, name="normalized_username")
+	 */
+	protected $normalizedUsername;
+
+	/**
+	 * @Column(type="string", length=32)
+	 */
+	protected $token;
+
 	public function getUsername()
 	{
 		return $this->username;
@@ -33,5 +43,21 @@ class User {
 	public function setUsername($username)
 	{
 		$this->username = $username;
+	}
+
+	/**
+	 * @param String $token
+	 */
+	public function setToken($token)
+	{
+		$this->token = $token;
+	}
+
+	/**
+	 * @param mixed $normalizedUsername
+	 */
+	public function setNormalizedUsername($normalizedUsername)
+	{
+		$this->normalizedUsername = $normalizedUsername;
 	}
 }

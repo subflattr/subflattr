@@ -24,8 +24,10 @@ $app->register(new Subflattr\Auth\OAuthServiceProvider(), array(
 ));
 $app->register(new DoctrineServiceProvider, array(
 	"db.options" => array(
-		"driver" => "pdo_sqlite",
-		"path" => $basepath . "subflattr.db",
+		"driver" => "pdo_mysql",
+		"dbname" => "subflattr",
+		"user" => "subflattr",
+		"password" => "subflattr"
 	),
 ));
 $app->register(new DoctrineOrmServiceProvider, array(
