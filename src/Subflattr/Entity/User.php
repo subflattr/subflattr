@@ -5,7 +5,7 @@ namespace Subflattr\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @Entity
+ * @Entity(repositoryClass="Subflattr\Repositories\UserRepository")
  * @Table(name="users")
  */
 class User {

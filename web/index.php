@@ -36,8 +36,8 @@ $app->register(new DoctrineOrmServiceProvider, array(
 		"mappings" => array(
 			array(
 				"type" => "annotation",
-				"namespace" => 'Subflattr\Entity',
-				"path" => $basepath . 'src/Subflattr/Entity',
+				"namespace" => 'Subflattr',
+				"path" => $basepath . 'src/Subflattr',
 			),
 		)
 	)
