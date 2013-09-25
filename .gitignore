@@ -3,3 +3,5 @@
 vendor
 composer.phar
 log/dev.log
+
+.DS_Store
