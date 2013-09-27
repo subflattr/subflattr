@@ -7,15 +7,19 @@ use Subflattr\Application;
 use Symfony\Component\HttpFoundation\Request;
 
 
-
 class DashboardController
 {
-    public function index(Request $request, Application $app)
-    {
-//	    $app->log("You called /",[],Logger::INFO);
-//
-//	    $oauth = $app->oauth();
+	public function index(Request $request, Application $app)
+	{
+		if (!$app->isLoggedIn())
+			return $app->redirect('/');
 
-        return $app->render('dashboard/index.twig');
-    }
+
+		$rendervars = [
+			'loggedin' => true,
+			'user' => $app->getUserData()
+		];
+
+		return $app->render('dashboard/index.twig', $rendervars);
+	}
 }
