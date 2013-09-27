@@ -15,4 +15,13 @@ class UserRepository extends EntityRepository{
 	public function findByUsername($username) {
 		return $this->findOneBy(array('username'=>$username));
 	}
+
+	/**
+	 * @param $username
+	 * @return User
+	 */
+	public function findByNormalizedUsername($username) {
+		return $this->findOneBy(array('normalizedUsername'=>strtolower($username)));
+	}
+
 }

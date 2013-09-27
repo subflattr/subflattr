@@ -76,7 +76,7 @@ class User {
 	}
 
 	/**
-	 * @return mixed
+	 * @return Feed
 	 */
 	public function getFeed()
 	{

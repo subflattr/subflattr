@@ -23,9 +23,7 @@ class CreatorController {
 
 	public function createSubmit(Request $request, Application $app) {
 
-		$greeting = $request->get('greeting');
-
-		$feed = new Feed($app->session()->get('userid'), $greeting);
+		$feed = new Feed($app->session()->get('userid'), $request->get('greeting'), $request->get('subheading'), $request->get('description'));
 
 		$app->doctrine()->persist($feed);
 		$app->doctrine()->flush();
