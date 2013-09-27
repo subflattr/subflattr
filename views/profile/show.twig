@@ -1,0 +1,66 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+<div class="jumbotron">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4">
+				<img src="http://placekitten.com/1000/1000" class="img-rounded img-responsive">
+			</div>
+			<div class="col-sm-8">
+				<h1>Hi, I'm {{ name }}</h1>
+				<h2>I CREATE MEOW AND MEW.</h2>
+				<h4>If you give me one Flattr for each thing I create. I can create more tracks, with more love. And you will know it first, there might even be some treats!</h4>
+				<br>
+				<div class="row">
+					<div class="col-sm-12">
+						<a class="btn btn-success btn-lg">Subscribe to Bonq's feed</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="list-group">
+		<!-- Feed -->
+
+		<div class="row list-group-item clearfix">
+			<div class="col-md-12">
+				<h1>Heading of feed item</h1>
+			</div>
+			<div class="col-md-2">
+				<img src="http://placekitten.com/300/300" class="img-rounded img-responsive">
+			</div>
+			<div class="col-md-10">
+				<blockquote>
+					<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+					<p><a href="#">http://www.internet.ninja.com/apost_of_dignity</a></p>
+					<p><small>by Bonq, Sept 19 2013</small></p>
+					<p>
+						<script id='fb2ewwo'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='http://api.flattr.com/button/view/?uid=bonq&button=compact&url=http%3A%2F%2Fwww.gooasdfasdfgle.com';f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fb2ewwo');</script>
+					</p>
+				</blockquote>
+			</div>
+		</div>
+
+		<div class="row list-group-item clearfix">
+			<div class="col-md-12">
+				<h1>Heading of feed item 2</h1>
+			</div>
+			<div class="col-md-2">
+				<img src="http://placekitten.com/400/400" class="img-rounded img-responsive">
+			</div>
+			<div class="col-md-10">
+				<blockquote>
+					<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+					<p><a href="#">http://www.internet.ninja.com/apost_of_dignity</a></p>
+					<p><small>by Bonq, Sept 19 2013</small></p>
+					<p>
+						<script id='asdf'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='http://api.flattr.com/button/view/?uid=bonq&button=compact&url=http%3A%2F%2Fwww.gooasdfasdfgle.com';f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('asdf');</script>
+					</p>
+				</blockquote>
+			</div>
+		</div>
+{% endblock %}
