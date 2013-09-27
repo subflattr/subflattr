@@ -12,14 +12,17 @@ class ProfileController
 {
 	public function show(Request $request, Application $app)
 	{
-
-		$app->log($request->get('name'));
-
-		return $app->render('profile/show.twig', array(
+		$rendervars = [
 			'loggedin' => $app->isLoggedIn(),
-			'user' => [
-				'name' => $user->getUsername()
-			],
-			'name' => $request->get('name')));
+			'name' => $request->get('name')
+		];
+
+		if($app->isLoggedIn())
+			$rendervars['user'] = $app->getUserData();
+		else
+			$rendervars['oauthlink'] = $app->oauth()->getAuthuri();
+
+
+		return $app->render('profile/show.twig', $rendervars);
 	}
 }
