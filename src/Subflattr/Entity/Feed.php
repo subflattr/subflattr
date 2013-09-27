@@ -9,6 +9,16 @@ namespace Subflattr\Entity;
 class Feed {
 
 	/**
+	 * @param int $userid
+	 * @param string $greeting
+	 */
+	public function __construct($userid, $greeting) {
+		$this->owner = $userid;
+		$this->greeting = $greeting;
+	}
+
+
+	/**
 	 * @Id
 	 * @Column(type="integer")
 	 * @GeneratedValue
