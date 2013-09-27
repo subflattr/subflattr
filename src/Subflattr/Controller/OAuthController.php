@@ -31,6 +31,6 @@ class OAuthController {
 		}
 
 		$app->session()->set('userid', $user->getId());
-		return $app->redirect('/profile/foobar');
+		return $app->redirect('/dashboard/');
 	}
 }
