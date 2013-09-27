@@ -49,5 +49,7 @@ $app->get('/', 'Subflattr\Controller\IndexController::foobar');
 $app->get('/oauth/', 'Subflattr\Controller\OAuthController::authorize');
 $app->get('/dashboard/', 'Subflattr\Controller\DashboardController::index');
 $app->get('/profile/{name}', 'Subflattr\Controller\ProfileController::show');
+$app->get('/create/', 'Subflattr\Controller\CreatorController::create');
+$app->post('/create/', 'Subflattr\Controller\CreatorController::createSubmit');
 
 $app->run();
