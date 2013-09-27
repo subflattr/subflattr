@@ -16,14 +16,6 @@ class DashboardController
 		if (!$app->isLoggedIn())
 			return $app->redirect('/');
 
-
-		/** @var UserRepository $repo */
-		$repo = $app->doctrine()->getRepository('Subflattr\Entity\User');
-		/** @var User $user */
-		$user = $repo->find(2);
-
-		var_dump($user->getFeed()->getGreeting());die();
-
 		$rendervars = [
 			'loggedin' => true,
 			'user' => $app->getUserData()
