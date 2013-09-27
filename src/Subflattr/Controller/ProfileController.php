@@ -15,21 +15,8 @@ class ProfileController
 
 		$app->log($request->get('name'));
 
-		$userid = $app->session()->get('userid');
-
-		if (isset($userid)) {
-			$loggedin = true;
-		}else{
-			$loggedin = false;
-		}
-
-		/** @var UserRepository */
-		$repo = $app->doctrine()->getRepository('Subflattr\Entity\User');
-		/** @var User $user */
-		$user = $repo->find($app->session()->get('userid'));
-
 		return $app->render('profile/show.twig', array(
-			'loggedin' => $loggedin,
+			'loggedin' => $app->isLoggedIn(),
 			'user' => [
 				'name' => $user->getUsername()
 			],

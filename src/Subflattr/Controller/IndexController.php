@@ -16,6 +16,15 @@ class IndexController
 
 	    $oauth = $app->oauth();
 
-        return $app->render('index/index.twig', ['loggedin'=> false, 'url' => $oauth->getAuthuri()]);
+
+	    $rendervars = [
+		    'loggedin' => $app->isLoggedIn(),
+		    'url' => $oauth->getAuthuri()
+	    ];
+
+	    if($app->isLoggedIn())
+		    $rendervars['user'] = $app->getUserData();
+
+	    return $app->render('index/index.twig', $rendervars);
     }
 }

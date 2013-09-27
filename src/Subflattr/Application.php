@@ -8,6 +8,7 @@ use Silex\Application\TwigTrait;
 use Subflattr\Auth\OAuthTrait;
 use Subflattr\Doctrine\DoctrineTrait;
 use Subflattr\Session\SessionTrait;
+use Subflattr\User\UserTrait;
 
 class Application extends SilexApp {
     use MonologTrait;
@@ -15,4 +16,5 @@ class Application extends SilexApp {
     use OAuthTrait;
 	use DoctrineTrait;
 	use SessionTrait;
+	use UserTrait;
 }
