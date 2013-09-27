@@ -3,8 +3,6 @@
 namespace Subflattr\Controller;
 
 use Subflattr\Application;
-use Subflattr\Entity\User;
-use Subflattr\Repositories\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 
 
