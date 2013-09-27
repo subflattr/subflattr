@@ -3,6 +3,7 @@
 namespace Subflattr\Controller;
 
 use Subflattr\Application;
+use Subflattr\Entity\Feed;
 use Subflattr\Entity\User;
 use Subflattr\Repositories\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,11 +31,17 @@ class ProfileController
 		if(!isset($user))
 			return $app->render('profile/notfound.twig', $rendervars, new Response("User not found", 404));
 
+		/** @var Feed $feed */
+		$feed = $user->getFeed();
+		if(!isset($user))
+			return $app->render('profile/notfound.twig', $rendervars, new Response("User not found", 404));
+
+
 		$rendervars = array_merge($rendervars, [
 			'name' => $user->getUsername(),
-			'greeting' => $user->getFeed()->getGreeting(),
-			'subheading' => $user->getFeed()->getSubheading(),
-			'description' => $user->getFeed()->getDescription()
+			'greeting' => $feed->getGreeting(),
+			'subheading' => $feed->getSubheading(),
+			'description' => $feed->getDescription()
 		]);
 
 		if($app->isLoggedIn())
