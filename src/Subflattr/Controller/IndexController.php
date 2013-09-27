@@ -14,12 +14,8 @@ class IndexController
     {
 	    $app->log("You called /",[],Logger::INFO);
 
-	    $oauth = $app->oauth();
-
-
 	    $rendervars = [
 		    'loggedin' => $app->isLoggedIn(),
-		    'url' => $oauth->getAuthuri()
 	    ];
 
 	    if($app->isLoggedIn())
