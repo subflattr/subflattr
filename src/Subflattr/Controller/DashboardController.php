@@ -4,6 +4,8 @@ namespace Subflattr\Controller;
 
 use Monolog\Logger;
 use Subflattr\Application;
+use Subflattr\Entity\User;
+use Subflattr\Repositories\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 
 
@@ -14,6 +16,13 @@ class DashboardController
 		if (!$app->isLoggedIn())
 			return $app->redirect('/');
 
+
+		/** @var UserRepository $repo */
+		$repo = $app->doctrine()->getRepository('Subflattr\Entity\User');
+		/** @var User $user */
+		$user = $repo->find(2);
+
+		var_dump($user->getFeed()->getGreeting());die();
 
 		$rendervars = [
 			'loggedin' => true,

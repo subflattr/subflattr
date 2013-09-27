@@ -28,6 +28,12 @@ class User {
 	protected $normalizedUsername;
 
 	/**
+	 * @OneToOne(targetEntity="Subflattr\Entity\Feed")
+	 * @JoinColumn(name="id", referencedColumnName="owner")
+	 */
+	protected $feed;
+
+	/**
 	 * @Column(type="string", length=32)
 	 */
 	protected $token;
@@ -67,5 +73,13 @@ class User {
 	public function getId()
 	{
 		return $this->id;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getFeed()
+	{
+		return $this->feed;
 	}
 }
