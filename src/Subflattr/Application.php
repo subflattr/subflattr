@@ -7,10 +7,12 @@ use Silex\Application\MonologTrait;
 use Silex\Application\TwigTrait;
 use Subflattr\Auth\OAuthTrait;
 use Subflattr\Doctrine\DoctrineTrait;
+use Subflattr\Session\SessionTrait;
 
 class Application extends SilexApp {
     use MonologTrait;
     use TwigTrait;
     use OAuthTrait;
 	use DoctrineTrait;
+	use SessionTrait;
 }

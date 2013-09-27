@@ -42,6 +42,7 @@ $app->register(new DoctrineOrmServiceProvider, array(
 		)
 	)
 ));
+$app->register(new Silex\Provider\SessionServiceProvider());
 
 
 $app->get('/', 'Subflattr\Controller\IndexController::foobar');
