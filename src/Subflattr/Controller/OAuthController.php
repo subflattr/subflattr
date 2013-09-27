@@ -30,6 +30,7 @@ class OAuthController {
 			$app->doctrine()->flush();
 		}
 
-		return $app->render('oauth/authorize.twig', ['username' => $user->getUsername()]);
+		$app->session()->set('userid', $user->getId());
+		return $app->redirect('/profile/foobar');
 	}
 }

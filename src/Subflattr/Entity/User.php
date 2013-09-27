@@ -60,4 +60,12 @@ class User {
 	{
 		$this->normalizedUsername = $normalizedUsername;
 	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
 }
