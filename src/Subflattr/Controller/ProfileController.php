@@ -15,6 +15,11 @@ class ProfileController
 
 	    $app->log($request->get('name'));
 
-        return $app->render('profile/show.twig', array('name' => $request->get('name')));
+        return $app->render('profile/show.twig', array(
+	        'loggedin' => true,
+	        'user' => [
+		        'name' => 'Foobarbaz'
+	        ],
+	        'name' => $request->get('name')));
     }
 }

@@ -14,7 +14,12 @@
 
 <body>
 
-{% include 'nav/loggedin.twig' %}
+{% if loggedin %}
+	{% include 'nav/loggedin.twig' %}
+{% else %}
+	{% include 'nav/loggedout.twig' %}
+{% endif %}
+
 
 {% block jumbotron %}{% endblock %}
 
