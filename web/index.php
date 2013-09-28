@@ -51,5 +51,6 @@ $app->get('/dashboard/', 'Subflattr\Controller\DashboardController::index');
 $app->get('/profile/{name}', 'Subflattr\Controller\ProfileController::show');
 $app->get('/create/', 'Subflattr\Controller\CreatorController::create');
 $app->post('/create/', 'Subflattr\Controller\CreatorController::createSubmit');
+$app->get('/logout/', 'Subflattr\Controller\SessionController::logout');
 
 $app->run();
