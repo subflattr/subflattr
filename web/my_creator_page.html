@@ -26,12 +26,35 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Discover creators</a></li>
-            <li><a href="#contact">Start creator feed</a></li>
+            <li><a href="#">Discover creators</a></li>
+            
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Subscriptions <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Combined Feed</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Tim Pritlove</span></a></li>
+                <li><a href="#">Another Creator</a></li>
+                <li><a href="#">3rd creator</a></li>
+                <li><a href="#">Yet another</a></li>
+              </ul>
+            </li>
+
           </ul>
-          <form class="navbar-form navbar-right">
-            <button type="submit" class="btn btn-success">Connect with Flattr</button>
-          </form>
+          <form class="nav navbar-nav navbar-right">
+            <li class="active"><a href="#contact">My creator feed</a></li>
+           
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Logged in as bonq <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Sign out</a></li>
+              </ul>
+            </li>
+
         </div><!--/.navbar-collapse -->
       </div>
     </div>
@@ -46,11 +69,11 @@
             <h1>Hi, I'm Bonq!</h1>
             <h2>I CREATE CHIPTUNES AND BLIP HOP.</h2>
             <h4>If you give me one Flattr for each thing I create. I can create more tracks, with more love. And you will know it first, there might even be some treats!</h4>
+            <p><a href="#"><span class="label label-default"><span class="glyphicon glyphicon-edit"></span> Edit my info</span></a></p>
             <br>
             <div class="row">
               <div class="col-sm-12">
                 <p> 1337 Subscribers</p>
-                <a class="btn btn-success btn-lg">Subscribe to Bonq's feed</a>
               </div>
             </div>
           </div>
@@ -59,11 +82,17 @@
     </div>
 
     <div class="container">
+      <div class="row">
+        <p><a href="#" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus-sign"></span> Add item to my feed</a></p>
+        <br>
+      </div>
+    
       <div class="list-group">
       <!-- Feed -->
 
         <div class="row list-group-item clearfix">
           <div class="col-md-12">
+            <a href="#" class="btn btn-info btn-sm pull-right"><span class="glyphicon glyphicon-edit"></span> Edit item</a>
             <h1>Heading of feed item</h1>
           </div>
           <div class="col-md-2">
@@ -76,13 +105,14 @@
               <p><small>by Bonq, Sept 19 2013</small></p>
               <p>
                 <script id='fb2ewwo'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='http://api.flattr.com/button/view/?uid=bonq&button=compact&url=http%3A%2F%2Fwww.gooasdfasdfgle.com';f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fb2ewwo');</script>
-              </p>  
+              </p>
             </blockquote>
           </div>
         </div>
  
         <div class="row list-group-item clearfix">
           <div class="col-md-12">
+            <a href="#" class="btn btn-info btn-sm pull-right"><span class="glyphicon glyphicon-edit"></span> Edit item</a>
             <h1>Heading of feed item 2</h1>
           </div>
           <div class="col-md-2">
