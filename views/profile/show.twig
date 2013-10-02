@@ -8,9 +8,9 @@
 				<img src="http://placekitten.com/1000/1000" class="img-rounded img-responsive">
 			</div>
 			<div class="col-sm-8">
-				<h1>{{ greeting }}</h1>
-				<h2>{{ subheading }}</h2>
-				<h4>{{ description }}</h4>
+				<h1>{{ greeting|e }}</h1>
+				<h2>{{ subheading|e }}</h2>
+				<h4>{{ description|e|nl2br }}</h4>
 				<br>
 				<div class="row">
 					<div class="col-sm-12">
