@@ -16,4 +16,9 @@
 			</div>
 		</div>
 	</div>
+
+	{% if user is defined %}
+		{% include 'creator/modal.twig' %}
+	{% endif %}
+
 {% endblock %}

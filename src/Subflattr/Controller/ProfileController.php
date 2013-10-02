@@ -22,7 +22,6 @@ class ProfileController
 		else
 			$rendervars['oauthlink'] = $app->oauth()->getAuthuri();
 
-
 		/** @var UserRepository $repo */
 		$repo = $app->doctrine()->getRepository('Subflattr\Entity\User');
 		/** @var User $profileUser */
@@ -42,12 +41,6 @@ class ProfileController
 			'subheading' => $feed->getSubheading(),
 			'description' => $feed->getDescription()
 		]);
-
-		if($app->isLoggedIn())
-			$rendervars['user'] = $app->getUserData();
-		else
-			$rendervars['oauthlink'] = $app->oauth()->getAuthuri();
-
 
 		return $app->render('profile/show.twig', $rendervars);
 	}
