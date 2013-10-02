@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CreatorController {
 
-	public function createSubmit(Request $request, Application $app) {
+	public function create(Request $request, Application $app) {
 
 		/** @var UserRepository $repo */
 		$repo = $app->doctrine()->getRepository('\Subflattr\Entity\User');
