@@ -19,7 +19,7 @@ class IndexController
 	    ];
 
 	    if($app->isLoggedIn())
-		    $rendervars['user'] = $app->getUserData();
+		    return $app->redirect('/dashboard/');
 	    else
 		    $rendervars['oauthlink'] = $app->oauth()->getAuthuri();
 
