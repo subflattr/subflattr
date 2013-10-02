@@ -21,7 +21,8 @@ trait UserTrait {
 		$user = $repo->find($this->session()->get('userid'));
 
 		return [
-			'name' => $user->getUsername()
+			'name' => $user->getUsername(),
+			'feed' => $user->getFeed()->toArray()
 		];
 	}
 }

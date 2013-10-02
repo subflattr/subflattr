@@ -5,15 +5,15 @@
 				<div class="modal-body">
 					<div class="form-group">
 						<label for="greeting">Headline</label>
-						<input name="greeting" id="greeting" class="form-control" maxlength="23" value="{{ greeting }}" placeholder="The greeting line">
+						<input name="greeting" id="greeting" class="form-control" maxlength="23" value="{{ user.feed.greeting | default()}}" placeholder="The greeting line">
 					</div>
 					<div class="form-group">
 						<label for="subheading">Byline</label>
-						<input name="subheading" id="subheading" class="form-control" maxlength="50" value="{{ subheading }}" placeholder="Tell what you are doing">
+						<input name="subheading" id="subheading" class="form-control" maxlength="50" value="{{ user.feed.subheading | default()}}" placeholder="Tell what you are doing">
 					</div>
 					<div class="form-group">
 						<label for="description">Title</label>
-						<textarea name="description" id="description" maxlength="200" placeholder="What will you do with the support?" class="form-control">{{ description }}</textarea>
+						<textarea name="description" id="description" maxlength="200" placeholder="What will you do with the support?" class="form-control">{{ user.feed.description | default() }}</textarea>
 					</div>
 					<div class="form-group">
 						<label for="myImage">Profile image</label>

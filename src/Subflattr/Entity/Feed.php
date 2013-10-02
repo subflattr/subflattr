@@ -114,4 +114,13 @@ class Feed {
 		$this->isActive = $isActive;
 	}
 
+
+	public function toArray() {
+		return [
+			'greeting' => $this->greeting,
+			'subheading' => $this->subheading,
+			'description' => $this->description,
+			'isActive' => $this->isActive
+		];
+	}
 }
