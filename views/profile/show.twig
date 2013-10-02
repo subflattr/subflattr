@@ -14,13 +14,72 @@
 				<br>
 				<div class="row">
 					<div class="col-sm-12">
-						<a class="btn btn-success btn-lg">Subscribe to {{ name }}'s feed</a>
+						{% if user is defined and user.name == name %}
+							<a href="#editMe" class="btn btn-info btn-sm" data-toggle="modal"><span class="glyphicon glyphicon-edit"></span> Edit my info</a>
+						{% else %}
+							<a class="btn btn-success btn-lg">Subscribe to {{ name }}'s feed</a>
+						{% endif %}
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+{% if user is defined and user.name == name %}
+	<!-- Modal -->
+	<div class="modal fade" id="editMe" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form method="post" action="/create/">
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="greeting">Headline</label>
+							<input name="greeting" id="greeting" class="form-control" maxlength="23" value="{{ greeting }}" placeholder="The greeting line">
+						</div>
+						<div class="form-group">
+							<label for="subheading">Byline</label>
+							<input name="subheading" id="subheading" class="form-control" maxlength="50" value="{{ subheading }}" placeholder="Tell what you are doing">
+						</div>
+						<div class="form-group">
+							<label for="description">Title</label>
+							<textarea name="description" id="description" maxlength="200" placeholder="What will you do with the support?" class="form-control">{{ description }}</textarea>
+						</div>
+						<div class="form-group">
+							<label for="myImage">Profile image</label>
+							<p><img src="http://placekitten.com/100/100" class="img-rounded img-responsive"></p>
+							<input type="file" id="myimage">
+							<p class="help-block">The image will be cropped to square.</p>
+						</div>
+						<div class="form-group">
+							<p><label for="image">Wallpaper</label></p>
+							<label class="radio-inline">
+								<input type="radio" name="wallpapers" id="inlineCheckbox1" value="option1" checked> <img src="http://placekitten.com/100/40" class="img-rounded">
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="wallpapers" id="inlineCheckbox2" value="option2"> <img src="http://placekitten.com/101/40" class="img-rounded">
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="wallpapers" id="inlineCheckbox3" value="option3"> <img src="http://placekitten.com/102/40" class="img-rounded">
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="wallpapers" id="inlineCheckbox4" value="option4"> <img src="http://placekitten.com/103/40" class="img-rounded">
+							</label>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-success">Save my info</button>
+					</div>
+				</form>
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Edit my info</h4>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+{% endif %}
+
 {% endblock %}
 
 

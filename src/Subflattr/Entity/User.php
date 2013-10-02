@@ -82,4 +82,12 @@ class User {
 	{
 		return $this->feed;
 	}
+
+	/**
+	 * @param mixed $feed
+	 */
+	public function setFeed($feed)
+	{
+		$this->feed = $feed;
+	}
 }

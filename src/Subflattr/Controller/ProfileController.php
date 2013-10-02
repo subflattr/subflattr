@@ -25,20 +25,19 @@ class ProfileController
 
 		/** @var UserRepository $repo */
 		$repo = $app->doctrine()->getRepository('Subflattr\Entity\User');
-		/** @var User $user */
-		$user = $repo->findByNormalizedUsername($request->get('name'));
+		/** @var User $profileUser */
+		$profileUser = $repo->findByNormalizedUsername($request->get('name'));
 
-		if(!isset($user))
+		if(!isset($profileUser))
 			return $app->render('profile/notfound.twig', $rendervars, new Response("User not found", 404));
 
 		/** @var Feed $feed */
-		$feed = $user->getFeed();
-		if(!isset($user))
+		$feed = $profileUser->getFeed();
+		if(!$feed->isActive())
 			return $app->render('profile/notfound.twig', $rendervars, new Response("User not found", 404));
 
-
 		$rendervars = array_merge($rendervars, [
-			'name' => $user->getUsername(),
+			'name' => $profileUser->getUsername(),
 			'greeting' => $feed->getGreeting(),
 			'subheading' => $feed->getSubheading(),
 			'description' => $feed->getDescription()

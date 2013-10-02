@@ -9,19 +9,6 @@ namespace Subflattr\Entity;
 class Feed {
 
 	/**
-	 * @param int $userid
-	 * @param string $greeting
-	 * @param string $subheading
-	 * @param string $description
-	 */
-	public function __construct($userid, $greeting, $subheading, $description) {
-		$this->owner = $userid;
-		$this->greeting = $greeting;
-		$this->subheading = $subheading;
-		$this->description = $description;
-	}
-
-	/**
 	 * @Id
 	 * @Column(type="integer")
 	 * @GeneratedValue
@@ -49,6 +36,11 @@ class Feed {
 	 */
 	protected $description;
 
+	/**
+	 * @Column(type="boolean", name="isactive")
+	 */
+	protected $isActive;
+
 
 	/**
 	 * @return mixed
@@ -72,6 +64,54 @@ class Feed {
 	public function getDescription()
 	{
 		return $this->description;
+	}
+
+	/**
+	 * @param mixed $greeting
+	 */
+	public function setGreeting($greeting)
+	{
+		$this->greeting = $greeting;
+	}
+
+	/**
+	 * @param mixed $subheading
+	 */
+	public function setSubheading($subheading)
+	{
+		$this->subheading = $subheading;
+	}
+
+	/**
+	 * @param mixed $description
+	 */
+	public function setDescription($description)
+	{
+		$this->description = $description;
+	}
+
+	/**
+	 * @param mixed $owner
+	 */
+	public function setOwner($owner)
+	{
+		$this->owner = $owner;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function isActive()
+	{
+		return $this->isActive;
+	}
+
+	/**
+	 * @param boolean $isActive
+	 */
+	public function setIsActive($isActive)
+	{
+		$this->isActive = $isActive;
 	}
 
 }
