@@ -19,7 +19,7 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 $app->register(new Subflattr\Auth\OAuthServiceProvider(), array(
 	'oauth.client.id' => 'Z38YeOfCylahFxTlK8gYG0QjS3VFgP06',
 	'oauth.client.secret' => 'IZUND0f2cf9ICSTdRZ1oPIxyCj4JYVFxKqaehg6jm6RPPASwqKK6j8uLhok6aPuK',
-	'oauth.redirecturi' => 'http://subflattr.local:8080/oauth/',
+	'oauth.redirecturi' => 'http://subflatt.lacerta.uberspace.de/oauth/',
 	'oauth.site' => 'https://flattr.com',
 ));
 $app->register(new DoctrineServiceProvider, array(
