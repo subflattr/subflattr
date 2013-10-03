@@ -4,9 +4,9 @@
 namespace Subflattr\Controller;
 
 
+use Imagine\Gd\Imagine;
 use Imagine\Image\Box;
 use Imagine\Image\Point;
-use Imagine\Imagick\Imagine;
 use Subflattr\Application;
 use Subflattr\Entity\User;
 use Subflattr\Repositories\UserRepository;
