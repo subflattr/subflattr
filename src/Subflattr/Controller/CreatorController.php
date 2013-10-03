@@ -23,7 +23,7 @@ class CreatorController {
 			$imagine = new Imagine();
 			$image = $imagine->open($file->getRealPath());
 			$image = $image->thumbnail(new Box(1000,1000));
-			$image->save('images/avatars/' . strtolower($app->getUserData()['name']));
+			$image->save('images/avatars/' . strtolower($app->getUserData()['name'] . '.png'));
 		}
 
 		/** @var UserRepository $repo */
