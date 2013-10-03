@@ -92,22 +92,6 @@ class User {
 	}
 
 	/**
-	 * @return Feed
-	 */
-	public function getFeed()
-	{
-		return $this->feed;
-	}
-
-	/**
-	 * @param mixed $feed
-	 */
-	public function setFeed($feed)
-	{
-		$this->feed = $feed;
-	}
-
-	/**
 	 * @return mixed
 	 */
 	public function getGreeting()
