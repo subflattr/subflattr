@@ -16,8 +16,24 @@ h2, h3, h4, h5, h6 {
   font-weight: 300;
 }
 
-.jumbotron {
+.jumbotron.creator{
   color: white;
   background: #fff url('../images/photos/podcast_back.jpg') center top;
   background-size: 100%;
+}
+.jumbotron.frontpage {
+  color: white;
+  background: #fff url('../images/photos/frontpage_back.jpg') center bottom;
+  background-size: 100%;
+}
+
+.frontpage_tumb {
+  margin: 20px 0;
+}
+
+.white_back {
+  background-color: #fff;
+}
+.discover .well:hover {
+  border-color: #bbb;
 }
