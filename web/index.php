@@ -25,9 +25,10 @@ $app->register(new Subflattr\Auth\OAuthServiceProvider(), array(
 $app->register(new DoctrineServiceProvider, array(
 	"db.options" => array(
 		"driver" => "pdo_mysql",
-		"dbname" => "subflattr",
-		"user" => "subflattr",
-		"password" => "subflattr"
+		"dbname" => "subflatt",
+		"user" => "subflatt",
+		"password" => "UtdaptAcmabziClotoyk",
+		"socket" => "/var/lib/mysql/mysql.sock"
 	),
 ));
 $app->register(new DoctrineOrmServiceProvider, array(
