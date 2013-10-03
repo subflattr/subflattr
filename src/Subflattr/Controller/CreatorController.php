@@ -39,7 +39,7 @@ class CreatorController {
 			}
 
 
-			$image->save('images/avatars/' . strtolower($app->getUserData()['name'] . '.png'));
+			$image->save('images/avatars/' . strtolower($app->getUserData()['name'] . '.jpg'));
 		}
 
 		/** @var UserRepository $repo */
