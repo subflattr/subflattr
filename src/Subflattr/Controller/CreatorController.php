@@ -22,7 +22,23 @@ class CreatorController {
 		if(isset($file) && ($file->getMimeType() == 'image/jpeg' || $file->getMimeType() == 'image/png')) {
 			$imagine = new Imagine();
 			$image = $imagine->open($file->getRealPath());
-			$image = $image->thumbnail(new Box(1000,1000));
+			$maxSize = 1000;
+
+			/** @var Box $size */
+			$size = $image->getSize();
+			if($size->getWidth() > $maxSize || $size->getHeight() > $maxSize) {
+				$cropStartX = floor(($size->getWidth() - $maxSize) / 2);
+				$cropStartY = floor(($size->getHeight() - $maxSize) / 2);
+
+				if($cropStartX < 0)
+					$cropStartX = 0;
+				if($cropStartY < 0)
+					$cropStartY = 0;
+
+				$image->crop(new Point($cropStartX, $cropStartY), new Box($maxSize, $maxSize));
+			}
+
+
 			$image->save('images/avatars/' . strtolower($app->getUserData()['name'] . '.png'));
 		}
 
