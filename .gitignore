@@ -5,3 +5,5 @@ composer.phar
 log/dev.log
 cache
 .DS_Store
+
+web/images/avatars/*
