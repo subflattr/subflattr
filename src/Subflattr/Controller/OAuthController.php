@@ -2,7 +2,7 @@
 
 namespace Subflattr\Controller;
 
-use DoctrineProxy\__CG__\Subflattr\Entity\Feed;
+use Subflattr\Entity\Feed;
 use Subflattr\Application;
 use Subflattr\Entity\User;
 use Subflattr\Repositories\UserRepository;
@@ -24,11 +24,14 @@ class OAuthController {
 
 		if(is_null($user)) {
 			$user = new User();
-			$user->setFeed(new Feed());
+			$feed = new Feed();
+			$user->setFeed($feed);
 			$user->setUsername($response->parse()['username']);
 			$user->setNormalizedUsername(strtolower($response->parse()['username']));
 			$user->setToken($token->getToken());
 			$app->doctrine()->persist($user);
+			$feed->setOwner($user->getId());
+//			$app->doctrine()->persist($feed);
 			$app->doctrine()->flush();
 		}
 

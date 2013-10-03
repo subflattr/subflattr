@@ -20,9 +20,6 @@ trait UserTrait {
 		/** @var User $user */
 		$user = $repo->find($this->session()->get('userid'));
 
-		return [
-			'name' => $user->getUsername(),
-			'feed' => $user->getFeed()->toArray()
-		];
+		return $user->toArray();
 	}
 }

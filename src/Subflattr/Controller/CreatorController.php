@@ -19,14 +19,13 @@ class CreatorController {
 		/** @var User $user */
 		$user = $repo->find($app->session()->get('userid'));
 
-		$feed = $user->getFeed();
-		$feed->isActive(true);
-		$feed->setOwner($user->getId());
-		$feed->setGreeting($request->get('greeting'));
-		$feed->setSubheading($request->get('subheading'));
-		$feed->setDescription($request->get('description'));
+		$user->setIsActive(true);
+		$user->setGreeting($request->get('greeting'));
+		$user->setSubheading($request->get('subheading'));
+		$user->setDescription($request->get('description'));
 
-		$app->doctrine()->persist($feed);
+		$app->doctrine()->persist($user);
+
 		$app->doctrine()->flush();
 
 		return $app->redirect('/');

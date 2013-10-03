@@ -27,7 +27,7 @@
 			</ul>
 			<form class="nav navbar-nav navbar-right">
 				{% if user.feed.isActive %}
-					<li><a data-toggle="modal" href="#editMe">Edit my profile</a></li>
+					<li><a data-toggle="modal" href="/profile/{{ user.name }}">My creator feed</a></li>
 				{% else %}
 					<li><a data-toggle="modal" href="#editMe">Start creator feed</a></li>
 				{% endif %}
