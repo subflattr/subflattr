@@ -24,14 +24,10 @@ class OAuthController {
 
 		if(is_null($user)) {
 			$user = new User();
-			$feed = new Feed();
-			$user->setFeed($feed);
 			$user->setUsername($response->parse()['username']);
 			$user->setNormalizedUsername(strtolower($response->parse()['username']));
 			$user->setToken($token->getToken());
 			$app->doctrine()->persist($user);
-			$feed->setOwner($user->getId());
-//			$app->doctrine()->persist($feed);
 			$app->doctrine()->flush();
 		}
 
