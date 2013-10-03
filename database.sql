@@ -16,23 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `feeds`
---
-
-DROP TABLE IF EXISTS `feeds`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `feeds` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `greeting` varchar(23) NOT NULL,
-  `owner` int(11) NOT NULL,
-  `subheading` varchar(50) NOT NULL,
-  `description` varchar(200) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `users`
 --
 
@@ -44,8 +27,12 @@ CREATE TABLE `users` (
   `username` varchar(30) DEFAULT NULL,
   `token` varchar(32) DEFAULT NULL,
   `normalized_username` varchar(30) NOT NULL,
+  `greeting` varchar(23) DEFAULT '',
+  `subheading` varchar(50) DEFAULT '',
+  `description` varchar(200) DEFAULT '',
+  `isactive` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -57,4 +44,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-10-02 18:50:54
+-- Dump completed on 2013-10-03  2:41:06
