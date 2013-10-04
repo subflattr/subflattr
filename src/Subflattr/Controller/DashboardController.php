@@ -2,10 +2,7 @@
 
 namespace Subflattr\Controller;
 
-use Monolog\Logger;
 use Subflattr\Application;
-use Subflattr\Entity\User;
-use Subflattr\Repositories\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 
 
