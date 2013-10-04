@@ -10,6 +10,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Subscription {
 
+	public function __construct(User $subscriber, User $subscribeto) {
+		$this->subscriber = $subscriber->getId();
+		$this->subscribedto = $subscribeto->getId();
+	}
+
+
 	/**
 	 * @Id
 	 * @Column(type="integer")

@@ -3,6 +3,7 @@
 namespace Subflattr\Controller;
 
 use Subflattr\Application;
+use Subflattr\Entity\Subscription;
 use Subflattr\Entity\User;
 use Subflattr\Repositories\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,4 +39,21 @@ class ProfileController
 
 		return $app->render('profile/show.twig', $rendervars);
 	}
+
+	public function subscribe(Request $request, Application $app) {
+
+		/** @var UserRepository $userRepo */
+		$userRepo = $app->doctrine()->getRepository('Subflattr\Entity\User');
+		/** @var User $user */
+		$user = $userRepo->find($app->session()->get('userid'));
+		$subscribeToUser = $userRepo->findByNormalizedUsername($request->get('name'));
+
+		$subscription = new Subscription($user, $subscribeToUser);
+
+		$app->doctrine()->persist($subscription);
+		$app->doctrine()->flush();
+
+		return $app->json(['success' => true]);
+	}
+
 }

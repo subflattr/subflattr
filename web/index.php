@@ -44,12 +44,12 @@ $app->register(new DoctrineOrmServiceProvider, array(
 ));
 $app->register(new Silex\Provider\SessionServiceProvider());
 
-
 $app->get('/', 'Subflattr\Controller\IndexController::foobar');
 $app->get('/oauth/', 'Subflattr\Controller\OAuthController::authorize');
 $app->get('/dashboard/', 'Subflattr\Controller\DashboardController::index');
 $app->get('/profile/{name}', 'Subflattr\Controller\ProfileController::show');
 $app->post('/create/', 'Subflattr\Controller\CreatorController::create');
 $app->get('/logout/', 'Subflattr\Controller\SessionController::logout');
+$app->post('/profile/subscribe/{name}', 'Subflattr\Controller\ProfileController::subscribe');
 
 $app->run();
