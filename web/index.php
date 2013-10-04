@@ -50,6 +50,6 @@ $app->get('/dashboard/', 'Subflattr\Controller\DashboardController::index');
 $app->get('/profile/{name}', 'Subflattr\Controller\ProfileController::show');
 $app->post('/create/', 'Subflattr\Controller\CreatorController::create');
 $app->get('/logout/', 'Subflattr\Controller\SessionController::logout');
-$app->post('/profile/subscribe/{name}', 'Subflattr\Controller\ProfileController::subscribe');
+$app->post('/profile/subscribe/', 'Subflattr\Controller\ProfileController::subscribe');
 
 $app->run();

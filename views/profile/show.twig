@@ -17,7 +17,10 @@
 						{% if user is defined and user.name == name %}
 							<a href="#editMe" class="btn btn-info btn-sm" data-toggle="modal"><span class="glyphicon glyphicon-edit"></span> Edit my info</a>
 						{% else %}
-							<a class="btn btn-success btn-lg">Subscribe to {{ name }}'s feed</a>
+							<form id="subscribe" action="/profile/subscribe/" method="POST">
+								<input type="hidden" name="name" value="{{ name }}" />
+								<button type="submit" class="btn btn-success btn-lg">Subscribe to {{ name }}'s feed</button>
+							</form>
 						{% endif %}
 					</div>
 				</div>
