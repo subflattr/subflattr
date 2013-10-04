@@ -17,18 +17,17 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => $basepath .'views',
 ));
 $app->register(new Subflattr\Auth\OAuthServiceProvider(), array(
-	'oauth.client.id' => 'Z38YeOfCylahFxTlK8gYG0QjS3VFgP06',
-	'oauth.client.secret' => 'IZUND0f2cf9ICSTdRZ1oPIxyCj4JYVFxKqaehg6jm6RPPASwqKK6j8uLhok6aPuK',
-	'oauth.redirecturi' => 'http://subflatt.lacerta.uberspace.de/oauth/',
+	'oauth.client.id' => 'aOZPvC8kksY5gHJS1qmM3eSOnwv440E4',
+	'oauth.client.secret' => 'FuK1WJc61018yAQpR21L6Kqk6Le1CJV73wYP50LWRDVf4BuMumnrWDBTfGLHfxF8',
+	'oauth.redirecturi' => 'http://subflattr.local:8080/oauth/',
 	'oauth.site' => 'https://flattr.com',
 ));
 $app->register(new DoctrineServiceProvider, array(
 	"db.options" => array(
 		"driver" => "pdo_mysql",
-		"dbname" => "subflatt",
-		"user" => "subflatt",
-		"password" => "UtdaptAcmabziClotoyk",
-		"socket" => "/var/lib/mysql/mysql.sock"
+		"dbname" => "subflattr",
+		"user" => "subflattr",
+		"password" => "subflattr"
 	),
 ));
 $app->register(new DoctrineOrmServiceProvider, array(
