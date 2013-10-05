@@ -16,6 +16,23 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `subscriptions`
+--
+
+DROP TABLE IF EXISTS `subscriptions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `subscriptions` (
+  `subscriber` int(11) NOT NULL,
+  `subscribedto` int(11) NOT NULL,
+  PRIMARY KEY (`subscriber`,`subscribedto`),
+  KEY `fk_subscribedto` (`subscribedto`),
+  CONSTRAINT `fk_subscriber` FOREIGN KEY (`subscriber`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_subscribedto` FOREIGN KEY (`subscribedto`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `users`
 --
 
@@ -31,8 +48,9 @@ CREATE TABLE `users` (
   `subheading` varchar(50) DEFAULT '',
   `description` varchar(200) DEFAULT '',
   `isactive` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -44,4 +62,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-10-03  2:41:06
+-- Dump completed on 2013-10-05 15:14:11
