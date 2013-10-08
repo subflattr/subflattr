@@ -23,17 +23,17 @@ Go into `web` directory and run `php -S localhost:8080` and point your browser t
 
 What works
 ----------
-Signup
-Creation and updating of profile
-subscription
+* Signup
+* Creation and updating of profile
+* subscription
 
 
 Next?
 -----
-unsubscribe
-show subscription counter
-submit new thing
-queue/worker system for working of flattrs
+* unsubscribe
+* show subscription counter
+* submit new thing
+* queue/worker system for working of flattrs
 
 
 
