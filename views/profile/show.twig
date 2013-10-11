@@ -34,8 +34,16 @@
 	</div>
 </div>
 
-{% if user is defined %}
+{% if user is defined and user.name == name %}
+	<div class="container">
+		<div class="row">
+			<p><a href="#addItem" class="btn btn-success btn-lg" data-toggle="modal"><span
+							class="glyphicon glyphicon-plus-sign"></span> Add item to my feed</a></p>
+			<br>
+		</div>
+	</div>
 	{% include 'creator/modal.twig' %}
+	{% include 'creator/submit.twig' %}
 {% endif %}
 
 {% endblock %}
