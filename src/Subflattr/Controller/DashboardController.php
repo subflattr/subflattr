@@ -15,7 +15,8 @@ class DashboardController
 
 		$rendervars = [
 			'loggedin' => true,
-			'user' => $app->getUserData()
+			'user' => $app->getUserData(),
+			'name' => $app->getUserData()['username']
 		];
 
 		return $app->render('dashboard/index.twig', $rendervars);

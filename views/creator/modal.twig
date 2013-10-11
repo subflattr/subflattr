@@ -21,7 +21,7 @@
 					</div>
 					<div class="form-group">
 						<label for="myImage">Profile image</label>
-						<p><img src="http://placekitten.com/100/100" class="img-rounded img-responsive"></p>
+						<p><img src="/images/avatars/{{ name|lower }}.jpg" width="100" class="img-rounded img-responsive"></p>
 						<input type="file" id="myimage" name="image">
 						<p class="help-block">The image will be cropped to square.</p>
 					</div>
@@ -43,7 +43,7 @@
 				</div>
 				<div class="modal-footer">
 					<div class="error hide alert alert-danger text-left">Image is too small</div>
-					<div class="success hide alert alert-success text-left">Saved successfully</div>
+					<div class="success hide alert alert-success text-left">Successfully saved</div>
 					<button type="submit" class="btn btn-success">Save my info</button>
 				</div>
 			</form>
