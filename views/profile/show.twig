@@ -14,6 +14,11 @@
 				<br>
 				<div class="row">
 					<div class="col-sm-12">
+						{% if subscribercount == 1 %}
+							<p>1 subscriber</p>
+						{% else %}
+							<p>{{ subscribercount }} subscribers</p>
+						{% endif %}
 						{% if user is defined and user.name == name %}
 							<a href="#editMe" class="btn btn-info btn-sm" data-toggle="modal"><span class="glyphicon glyphicon-edit"></span> Edit my info</a>
 						{% else %}

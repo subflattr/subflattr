@@ -34,7 +34,8 @@ class ProfileController
 			'name' => $profileUser->getUsername(),
 			'greeting' => $profileUser->getGreeting(),
 			'subheading' => $profileUser->getSubheading(),
-			'description' => $profileUser->getDescription()
+			'description' => $profileUser->getDescription(),
+			'subscribercount' => count($profileUser->getSubscriptions())
 		]);
 
 		return $app->render('profile/show.twig', $rendervars);
