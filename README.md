@@ -31,7 +31,6 @@ What works
 Next?
 -----
 * unsubscribe
-* show subscription counter
 * submit new thing
 * queue/worker system for working of flattrs
 
