@@ -6,7 +6,9 @@ small prototype project for flattr.com
 Dependencies
 ------------
 
-php5, php-mysql
+php5, php-mysql, gearman-server
+
+the gearman pecl extension
 
 a mysql server (change settings in web/index.php)
 
@@ -26,15 +28,18 @@ What works
 * Signup
 * Creation and updating of profile
 * subscription
-
+* Flattring
+* Submitting (partially)
 
 Next?
 -----
 * unsubscribe
-* show subscription counter
-* submit new thing
-* queue/worker system for working of flattrs
-
+* listing of submissions
+* submission thumbnail saving/checking
+* date saving in Thing-Entity
+* Wallpaper saving in profile
+* RSS feed
+* "Discover creators" page
 
 
 Licence
