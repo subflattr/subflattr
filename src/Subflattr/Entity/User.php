@@ -62,6 +62,11 @@ class User {
 	 */
 	protected $subscribedby;
 
+	/**
+	 * @OneToMany(targetEntity="Subflattr\Entity\Thing", mappedBy="creator")
+	 */
+	protected $things;
+
 	public function getUsername()
 	{
 		return $this->username;

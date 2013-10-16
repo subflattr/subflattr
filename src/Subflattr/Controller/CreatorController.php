@@ -11,9 +11,9 @@ use Imagine\Image\Point;
 use Monolog\Logger;
 use Subflattr\Application;
 use Subflattr\Entity\Subscription;
+use Subflattr\Entity\Thing;
 use Subflattr\Entity\User;
 use Subflattr\Model\Flattr;
-use Subflattr\Model\Thing;
 use Subflattr\Repositories\SubscriptionRepository;
 use Subflattr\Repositories\UserRepository;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -126,7 +126,10 @@ class CreatorController {
 			$client->doBackground("flattr", serialize(new Flattr($thingId, $subscription->getSubscriber())));
 		}
 
+		$thing = new Thing($request->get('url'), $request->get('title'), $request->get('desc'), $creator);
 //
+		$app->doctrine()->persist($thing);
+		$app->doctrine()->flush();
 //		/** @var UploadedFile $file */
 //		$file = $request->files->get('image');
 //
