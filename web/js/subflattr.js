@@ -11,6 +11,19 @@ $(document).ready(function(){
 		profileform.find('.success').removeClass('hide');
 	});
 
+	var submitform = $('#submitform');
+
+	submitform.ajaxForm(function(data) {
+		if(!data.success) {
+			submitform.find('.error').removeClass('hide');
+			submitform.find('.success').addClass('hide');
+			return;
+		}
+		submitform.find('.error').addClass('hide');
+		submitform.find('.success').removeClass('hide');
+	});
+
+
 	var subscribeForm = $('#subscribe');
 
 	subscribeForm.submit(function(e) {

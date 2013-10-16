@@ -72,4 +72,21 @@ class CreatorController {
 
 		return new JsonResponse(['success' => true]);
 	}
+
+	public function submit(Request $request, Application $app) {
+		if(!$app->session()->get('userid'))
+			return $app->redirect('/');
+
+
+		$client= new \GearmanClient();
+		$client->addServer();
+		$client->doBackground("submit", "Hello World!");
+
+		/** @var UploadedFile $file */
+		$file = $request->files->get('image');
+
+		$app->log("Submitting new thing by " . $app->getUserData()['name']);
+
+		return new JsonResponse(['success' => true]);
+	}
 }

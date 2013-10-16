@@ -6,7 +6,7 @@
 				<h4 class="modal-title">Add item to my feed</h4>
 			</div>
 			<div class="modal-body">
-				<form>
+				<form id="submitform" action="/creator/submit/" method="post">
 					<div class="form-group">
 						<label for="url">URL</label>
 						<input id="url" class="form-control" placeholder="http://awesome.site.com">
@@ -32,7 +32,7 @@
 					<p class="help-block">When added this item will be pushed to and flattred by {{ subscribercount }} subscribers.</p>
 				{% endif %}
 
-				<button type="button" class="btn btn-success">Add item</button>
+				<button type="submit" class="btn btn-success">Add item</button>
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
