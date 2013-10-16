@@ -1,7 +1,12 @@
 <?php
 use Dflydev\Silex\Provider\DoctrineOrm\DoctrineOrmServiceProvider;
+use Guzzle\Http\Exception\ClientErrorResponseException;
+use Monolog\Logger;
 use Silex\Provider\DoctrineServiceProvider;
 use Subflattr\Application;
+use Subflattr\Entity\User;
+use Subflattr\Model\Flattr;
+use Subflattr\Repositories\UserRepository;
 
 require_once __DIR__.'/vendor/autoload.php';
 
@@ -39,14 +44,41 @@ $app->register(new DoctrineOrmServiceProvider, array(
 		)
 	)
 ));
-//$app->run();
-
 
 $worker= new GearmanWorker();
 $worker->addServer();
-$worker->addFunction("submit", function($job, $app){
+$worker->addFunction("flattr", function($job, $app){
 	/** @var $app Application */
-	$app->log("WORKER HERE!");
+	/** @var $job GearmanJob */
+	/** @var Flattr $flattr */
+	$flattr = unserialize($job->workload());
+	$app->log(sprintf("Received work: Thing %s flattred by userid %s", $flattr->getThingId(), $flattr->getUserId()), ['worker']);
+
+	/** @var UserRepository $repo */
+	$repo = $app->doctrine()->getRepository('\Subflattr\Entity\User');
+	/** @var User $user */
+	$user = $repo->find($flattr->getUserId());
+
+	$userToken = $app->oauth()->getAccessTokenByToken($user->getToken());
+
+	$requestUrl = "https://api.flattr.com/rest/v2/things/". $flattr->getThingId() . "/flattr";
+
+	try {
+		$response = $userToken->post($requestUrl);
+		$parsedResponse = $response->parse();
+	}catch (ClientErrorResponseException $e) {
+		$app->log($e->getMessage(), ['worker'], Logger::ERROR);
+		return;
+	}
+
+	if($parsedResponse['message'] != 'ok') {
+		$app->log($parsedResponse['description'], ['worker'], Logger::ERROR);
+		return;
+	}
+	$app->log(sprintf("Successfully Flattred %s by %s", $flattr->getThingId(), $flattr->getUserId()), ['worker']);
+
 }, $app);
+
+
 while ($worker->work());
 

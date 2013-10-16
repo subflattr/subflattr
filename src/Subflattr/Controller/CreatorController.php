@@ -4,11 +4,17 @@
 namespace Subflattr\Controller;
 
 
+use Guzzle\Http\Exception\ClientErrorResponseException;
 use Imagine\Gd\Imagine;
 use Imagine\Image\Box;
 use Imagine\Image\Point;
+use Monolog\Logger;
 use Subflattr\Application;
+use Subflattr\Entity\Subscription;
 use Subflattr\Entity\User;
+use Subflattr\Model\Flattr;
+use Subflattr\Model\Thing;
+use Subflattr\Repositories\SubscriptionRepository;
 use Subflattr\Repositories\UserRepository;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -78,14 +84,53 @@ class CreatorController {
 			return $app->redirect('/');
 
 
+		/** @var UserRepository $repo */
+		$repo = $app->doctrine()->getRepository('\Subflattr\Entity\User');
+
+		/** @var User $creator */
+		$creator = $repo->find($app->session()->get('userid'));
+		$creatorToken = $app->oauth()->getAccessTokenByToken($creator->getToken());
+
+		$opts = array(
+			'url' => trim($request->get('url')),
+			'title' => trim($request->get('title')),
+			'description' => trim($request->get('desc')),
+		);
+		try {
+			$response = $creatorToken->post('https://api.flattr.com/rest/v2/things',array('params' => $opts));
+			$parsedResponse = $response->parse();
+		}catch (ClientErrorResponseException $e) {
+			$app->log($e,[],Logger::ERROR);
+			return new JsonResponse(['success' => false]);
+		}
+		if($parsedResponse['message'] != 'ok') {
+			$app->log($parsedResponse['description'],[],Logger::ERROR);
+			return new JsonResponse(['success' => false]);
+		}
+
+		$thingId = $parsedResponse['id'];
+		$app->log(sprintf("Successfully created new Thing %s for User %s", $thingId, $creator->getUsername()));
+
 		$client= new \GearmanClient();
 		$client->addServer();
-		$client->doBackground("submit", "Hello World!");
 
-		/** @var UploadedFile $file */
-		$file = $request->files->get('image');
+		/** @var SubscriptionRepository $subRepo */
+		$subRepo = $app->doctrine()->getRepository('\Subflattr\Entity\Subscription');
 
-		$app->log("Submitting new thing by " . $app->getUserData()['name']);
+		$subscriptions = $subRepo->findBy(
+			['subscribedto' => $creator->getId()]
+		);
+
+		/** @var $subscription Subscription */
+		foreach($subscriptions AS $subscription) {
+			$client->doBackground("flattr", serialize(new Flattr($thingId, $subscription->getSubscriber())));
+		}
+
+//
+//		/** @var UploadedFile $file */
+//		$file = $request->files->get('image');
+//
+//		$app->log("Submitting new thing by " . $app->getUserData()['name']);
 
 		return new JsonResponse(['success' => true]);
 	}

@@ -171,6 +171,13 @@ class User {
 		return $this->subscriptions;
 	}
 
+	/**
+	 * @return string
+	 */
+	public function getToken() {
+		return $this->token;
+	}
+
 	public function toArray()
 	{
 		return [
