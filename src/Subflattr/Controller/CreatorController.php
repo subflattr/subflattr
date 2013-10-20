@@ -83,6 +83,14 @@ class CreatorController {
 		if(!$app->session()->get('userid'))
 			return $app->redirect('/');
 
+		/** @var UploadedFile $file */
+		$file = $request->files->get('image');
+
+		if(!isset($file))
+			return new JsonResponse(['success' => false, 'status' => 407]);
+
+		if(!($file->getMimeType() == 'image/jpeg' || $file->getMimeType() == 'image/png'))
+			return new JsonResponse(['success' => false, 'status' => 408]);
 
 		/** @var UserRepository $repo */
 		$repo = $app->doctrine()->getRepository('\Subflattr\Entity\User');
@@ -94,6 +102,32 @@ class CreatorController {
 		$thing = new Thing($request->get('url'), $request->get('title'), $request->get('desc'), $creator);
 		$app->doctrine()->persist($thing);
 		$app->doctrine()->flush();
+
+		$app->log($thing->getId());
+
+
+		$imagine = new Imagine();
+		$image = $imagine->open($file->getRealPath());
+		$maxSize = 300;
+
+		/** @var Box $size */
+		$size = $image->getSize();
+
+		if($size->getHeight() < $maxSize || $size->getWidth() < $maxSize)
+			return new JsonResponse(['success' => false, 'status' => 406]);
+
+		if($size->getWidth() > $maxSize || $size->getHeight() > $maxSize) {
+			$cropStartX = floor(($size->getWidth() - $maxSize) / 2);
+			$cropStartY = floor(($size->getHeight() - $maxSize) / 2);
+
+			if($cropStartX < 0)
+				$cropStartX = 0;
+			if($cropStartY < 0)
+				$cropStartY = 0;
+
+			$image->crop(new Point($cropStartX, $cropStartY), new Box($maxSize, $maxSize));
+		}
+		$image->save('images/things/' . $thing->getId() . '.jpg');
 
 		$opts = array(
 			'url' => trim($request->get('url')),

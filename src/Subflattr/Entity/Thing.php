@@ -69,5 +69,12 @@ class Thing {
 		return $this->url;
 	}
 
+	/**
+	 * @return mixed
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
 
 }
