@@ -91,6 +91,10 @@ class CreatorController {
 		$creator = $repo->find($app->session()->get('userid'));
 		$creatorToken = $app->oauth()->getAccessTokenByToken($creator->getToken());
 
+		$thing = new Thing($request->get('url'), $request->get('title'), $request->get('desc'), $creator);
+		$app->doctrine()->persist($thing);
+		$app->doctrine()->flush();
+
 		$opts = array(
 			'url' => trim($request->get('url')),
 			'title' => trim($request->get('title')),
@@ -125,15 +129,6 @@ class CreatorController {
 		foreach($subscriptions AS $subscription) {
 			$client->doBackground("flattr", serialize(new Flattr($thingId, $subscription->getSubscriber())));
 		}
-
-		$thing = new Thing($request->get('url'), $request->get('title'), $request->get('desc'), $creator);
-//
-		$app->doctrine()->persist($thing);
-		$app->doctrine()->flush();
-//		/** @var UploadedFile $file */
-//		$file = $request->files->get('image');
-//
-//		$app->log("Submitting new thing by " . $app->getUserData()['name']);
 
 		return new JsonResponse(['success' => true]);
 	}
