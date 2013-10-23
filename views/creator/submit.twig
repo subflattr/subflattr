@@ -26,7 +26,11 @@
 						</div>
 				</div>
 				<div class="modal-footer">
-					<div class="error  alert alert-danger text-left">Image is too small</div>
+					<div class="error hide noimage alert alert-danger text-left">You have to submit an image</div>
+					<div class="error hide supportimage alert alert-danger text-left">We only support jpeg and png images</div>
+					<div class="error hide smallimage alert alert-danger text-left">Image is too small</div>
+					<div class="error hide badrequest alert alert-danger text-left">Flattr responded with a general error. Is the URL already submitted?</div>
+					<div class="error hide badrequesttext alert alert-danger text-left"></div>
 
 					{% if subscribercount == 1 %}
 						<p class="help-block">When added this item will be pushed to and flattred by 1 subscriber.</p>

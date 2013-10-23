@@ -101,7 +101,6 @@ class CreatorController {
 
 		$thing = new Thing($request->get('url'), $request->get('title'), $request->get('desc'), $creator);
 		$app->doctrine()->persist($thing);
-		$app->doctrine()->flush();
 
 		$app->log($thing->getId());
 
@@ -127,7 +126,6 @@ class CreatorController {
 
 			$image->crop(new Point($cropStartX, $cropStartY), new Box($maxSize, $maxSize));
 		}
-		$image->save('images/things/' . $thing->getId() . '.jpg');
 
 		$opts = array(
 			'url' => trim($request->get('url')),
@@ -139,12 +137,15 @@ class CreatorController {
 			$parsedResponse = $response->parse();
 		}catch (ClientErrorResponseException $e) {
 			$app->log($e,[],Logger::ERROR);
-			return new JsonResponse(['success' => false]);
+			return new JsonResponse(['success' => false, 'status' => 500]);
 		}
 		if($parsedResponse['message'] != 'ok') {
 			$app->log($parsedResponse['description'],[],Logger::ERROR);
-			return new JsonResponse(['success' => false]);
+			return new JsonResponse(['success' => false, 'status' => 501, 'message' => $parsedResponse['description']]);
 		}
+
+		$app->doctrine()->flush();
+		$image->save('images/things/' . $thing->getId() . '.jpg');
 
 		$thingId = $parsedResponse['id'];
 		$app->log(sprintf("Successfully created new Thing %s for User %s", $thingId, $creator->getUsername()));
