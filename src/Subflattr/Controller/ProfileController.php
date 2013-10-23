@@ -5,6 +5,7 @@ namespace Subflattr\Controller;
 use Subflattr\Application;
 use Subflattr\Entity\Subscription;
 use Subflattr\Entity\User;
+use Subflattr\Repositories\ThingRepository;
 use Subflattr\Repositories\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,7 +31,12 @@ class ProfileController
 		if(!isset($profileUser) || !$profileUser->isActive())
 			return $app->render('profile/notfound.twig', $rendervars, new Response("User not found", 404));
 
+		/** @var ThingRepository $thingrepo */
+		$thingrepo = $app->doctrine()->getRepository('Subflattr\Entity\Thing');
+
+
 		$rendervars = array_merge($rendervars, [
+			'things' => $thingrepo->findByCreator($profileUser->getId()),
 			'name' => $profileUser->getUsername(),
 			'greeting' => $profileUser->getGreeting(),
 			'subheading' => $profileUser->getSubheading(),
