@@ -2,6 +2,7 @@
 
 
 namespace Subflattr\Entity;
+use DateTime;
 use Subflattr\Entity\User;
 
 /**
@@ -31,6 +32,11 @@ class Thing {
 	 * @Column(type="string")
 	 */
 	protected $description;
+
+	/**
+	 * @Column(type="datetime")
+	 */
+	protected $created_at;
 
 	/**
 	 * @Column(name="creator")
@@ -75,6 +81,16 @@ class Thing {
 	public function getId()
 	{
 		return $this->id;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getCreatedAt()
+	{
+		/** @var DateTime $created_at */
+		$created_at = $this->created_at;
+		return $created_at->format('M j Y');
 	}
 
 }

@@ -65,7 +65,7 @@
 		<blockquote>
 			<p>{{ thing.description|nl2br }}</p>
 			<p><a target="_blank" href="{{ thing.url }}">{{ thing.url }}</a></p>
-			<p><small>by {{ name }}, Sept 19 2013</small></p>
+			<p><small>by {{ name }}, {{ thing.createdAt }}</small></p>
 			<p>
 				<script id='thing{{ thing.id }}'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='http://api.flattr.com/button/view/?button=compact&url={{ thing.url|url_encode }}';f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('thing{{ thing.id }}');</script>
 			</p>
