@@ -5,6 +5,7 @@ namespace Subflattr\Controller;
 use Subflattr\Application;
 use Subflattr\Entity\Subscription;
 use Subflattr\Entity\User;
+use Subflattr\Repositories\SubscriptionRepository;
 use Subflattr\Repositories\ThingRepository;
 use Subflattr\Repositories\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,6 +35,8 @@ class ProfileController
 		/** @var ThingRepository $thingrepo */
 		$thingrepo = $app->doctrine()->getRepository('Subflattr\Entity\Thing');
 
+		/** @var SubscriptionRepository $subscriptionRepo */
+		$subscriptionRepo = $app->doctrine()->getRepository('Subflattr\Entity\Subscription');
 
 		$rendervars = array_merge($rendervars, [
 			'things' => $thingrepo->findByCreator($profileUser->getId()),
@@ -41,7 +44,7 @@ class ProfileController
 			'greeting' => $profileUser->getGreeting(),
 			'subheading' => $profileUser->getSubheading(),
 			'description' => $profileUser->getDescription(),
-			'subscribercount' => count($profileUser->getSubscriptions())
+			'subscribercount' =>$subscriptionRepo->getSubscriptionCountForUserId($profileUser->getId())
 		]);
 
 		return $app->render('profile/show.twig', $rendervars);

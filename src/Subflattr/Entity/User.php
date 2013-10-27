@@ -52,21 +52,6 @@ class User {
 	 */
 	protected $isActive;
 
-	/**
-	 * @OneToMany(targetEntity="Subflattr\Entity\Subscription", mappedBy="subscriber")
-	 */
-	protected $subscriptions;
-
-	/**
-	 * @OneToMany(targetEntity="Subflattr\Entity\Subscription", mappedBy="subscribedto")
-	 */
-	protected $subscribedby;
-
-	/**
-	 * @OneToMany(targetEntity="Subflattr\Entity\Thing", mappedBy="creator")
-	 */
-	protected $things;
-
 	public function getUsername()
 	{
 		return $this->username;
@@ -166,14 +151,6 @@ class User {
 	public function setIsActive($isActive)
 	{
 		$this->isActive = $isActive;
-	}
-
-	/**
-	 * @return array|Subscription
-	 */
-	public function getSubscriptions()
-	{
-		return $this->subscriptions;
 	}
 
 	/**
