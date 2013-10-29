@@ -24,10 +24,10 @@ class ProfileController
 		else
 			$rendervars['oauthlink'] = $app->oauth()->getAuthuri();
 
-		/** @var UserRepository $repo */
-		$repo = $app->doctrine()->getRepository('Subflattr\Entity\User');
+		/** @var UserRepository $userRepo */
+		$userRepo = $app->doctrine()->getRepository('Subflattr\Entity\User');
 		/** @var User $profileUser */
-		$profileUser = $repo->findByNormalizedUsername($request->get('name'));
+		$profileUser = $userRepo->findByNormalizedUsername($request->get('name'));
 
 		if(!isset($profileUser) || !$profileUser->isActive())
 			return $app->render('profile/notfound.twig', $rendervars, new Response("User not found", 404));
@@ -38,8 +38,11 @@ class ProfileController
 		/** @var SubscriptionRepository $subscriptionRepo */
 		$subscriptionRepo = $app->doctrine()->getRepository('Subflattr\Entity\Subscription');
 
+		$isSubscribedTo = count($subscriptionRepo->findBy(['subscriber' => $app->session()->get('userid'), 'subscribedto' => $profileUser->getId()])) === 1;
+
 		$rendervars = array_merge($rendervars, [
 			'things' => $thingrepo->findByCreator($profileUser->getId()),
+			'subscribedTo' => $isSubscribedTo,
 			'name' => $profileUser->getUsername(),
 			'greeting' => $profileUser->getGreeting(),
 			'subheading' => $profileUser->getSubheading(),
