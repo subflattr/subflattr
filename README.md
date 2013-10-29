@@ -27,17 +27,10 @@ start gearman server with `gearman --verbose=INFO` or run as daemon.
 
 start gearman worker with `php worker.php`
 
-What works
-----------
-* Signup
-* Creation and updating of profile
-* subscription
-* Flattring
-* Submitting
-* listing of submissions
-
-Next?
------
+TODO
+----
+* "My subscriptions" menu
+* "My subscriptions" in dashboard
 * unsubscribe
 * Wallpaper saving in profile
 * RSS feed
