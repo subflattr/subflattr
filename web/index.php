@@ -52,5 +52,6 @@ $app->post('/create/', 'Subflattr\Controller\CreatorController::create');
 $app->post('/creator/submit/', 'Subflattr\Controller\CreatorController::submit');
 $app->get('/logout/', 'Subflattr\Controller\SessionController::logout');
 $app->post('/profile/subscribe/', 'Subflattr\Controller\ProfileController::subscribe');
+$app->post('/profile/unsubscribe/', 'Subflattr\Controller\ProfileController::unsubscribe');
 
 $app->run();

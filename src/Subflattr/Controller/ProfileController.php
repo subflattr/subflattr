@@ -69,4 +69,22 @@ class ProfileController
 		return $app->json(['success' => true]);
 	}
 
+	public function unsubscribe(Request $request, Application $app) {
+
+		/** @var UserRepository $userRepo */
+		$userRepo = $app->doctrine()->getRepository('Subflattr\Entity\User');
+		/** @var SubscriptionRepository $subscriptionRepo */
+		$subscriptionRepo = $app->doctrine()->getRepository('Subflattr\Entity\Subscription');
+
+		/** @var User $user */
+		$subscribeToUser = $userRepo->findByNormalizedUsername($request->get('name'));
+
+		/** @var Subscription $subscription */
+		$subscription = $subscriptionRepo->findBy(['subscriber' => $app->session()->get('userid'), 'subscribedto' => $subscribeToUser->getId()]);
+
+		$app->doctrine()->remove($subscription[0]);
+		$app->doctrine()->flush();
+
+		return $app->json(['success' => true]);
+	}
 }

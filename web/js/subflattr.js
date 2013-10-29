@@ -38,16 +38,27 @@ $(document).ready(function(){
 
 
 	var subscribeForm = $('#subscribe');
+	var unsubscribeForm = $('#unsubscribe');
 
-	subscribeForm.submit(function(e) {
-		e.preventDefault();
+	subscribeForm.find('button').click(function(e) {
+		console.log("foo");
 
-		$.ajax(subscribeForm.attr('action'),{
-			method: 'POST',
-			data: subscribeForm.serialize(),
-			success: function(data) {
-				console.log(data);
+		subscribeForm.ajaxForm(function(data){
+			if(data.success){
+				subscribeForm.addClass('hide');
+				unsubscribeForm.removeClass('hide');
 			}
-		})
+		});
 	});
+
+	unsubscribeForm.find('button').click(function(e) {
+
+		unsubscribeForm.ajaxForm(function(data){
+			if(data.success){
+				subscribeForm.removeClass('hide');
+				unsubscribeForm.addClass('hide');
+			}
+		});
+	});
+
 });
