@@ -31,7 +31,6 @@ TODO
 ----
 * "My subscriptions" menu
 * "My subscriptions" in dashboard
-* unsubscribe
 * Wallpaper saving in profile
 * RSS feed
 * "Discover creators" page
