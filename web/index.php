@@ -53,5 +53,6 @@ $app->post('/creator/submit/', 'Subflattr\Controller\CreatorController::submit')
 $app->get('/logout/', 'Subflattr\Controller\SessionController::logout');
 $app->post('/profile/subscribe/', 'Subflattr\Controller\ProfileController::subscribe');
 $app->post('/profile/unsubscribe/', 'Subflattr\Controller\ProfileController::unsubscribe');
+$app->get('/rss/{id}/', 'Subflattr\Controller\RssController::get');
 
 $app->run();

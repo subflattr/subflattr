@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+	<channel>
+		<title>Flattrable feed for {{ user }}</title>
+		<link>http://flattrable.com</link>
+		<description>Personalized feed for {{ user }}</description>
+
+		{% for thing in things %}
+			<item>
+				<title>{{ thing.title }}</title>
+				<link>{{ thing.url }}</link>
+				<description>{{ thing.description }}</description>
+				<pubDate>{{ thing.createdAt|date('D, d M Y H:i:s') }}</pubDate>
+				<guid>flattrable-{{ thing.id }}</guid>
+			</item>
+		{% endfor %}
+	</channel>
+</rss>
