@@ -53,6 +53,19 @@ class User {
 	 */
 	protected $isActive;
 
+	/**
+	 * @Column(type="string", length=40, name="rss_token")
+	 */
+	protected $rssToken;
+
+	/**
+	 * @return mixed
+	 */
+	public function getRssToken()
+	{
+		return $this->rssToken;
+	}
+
 	public function getUsername()
 	{
 		return $this->username;
@@ -165,6 +178,7 @@ class User {
 	{
 		return [
 			'name' => $this->username,
+			'rss_token' => $this->getRssToken(),
 			'feed' => [
 				'greeting' => $this->greeting,
 				'subheading' => $this->subheading,
