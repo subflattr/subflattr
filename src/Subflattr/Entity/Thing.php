@@ -6,7 +6,7 @@ use DateTime;
 use Subflattr\Entity\User;
 
 /**
- * @Entity
+ * @Entity(repositoryClass="Subflattr\Repositories\ThingRepository")
  * @Table(name="things")
  */
 class Thing {
@@ -39,8 +39,8 @@ class Thing {
 	protected $created_at;
 
 	/**
-	 * @Column(name="creator")
-	 * @ManyToOne(targetEntity="Subflattr\Entity\User", inversedBy="things")
+	 * @ManyToOne(targetEntity="\Subflattr\Entity\User", inversedBy="things")
+	 * @JoinColumn(name="creator", referencedColumnName="id")
 	 */
 	protected $creator;
 
@@ -49,6 +49,14 @@ class Thing {
 		$this->title = $title;
 		$this->description = $description;
 		$this->creator = $creator->getId();
+	}
+
+	/**
+	 * @return User
+	 */
+	public function getCreator()
+	{
+		return $this->creator;
 	}
 
 	/**

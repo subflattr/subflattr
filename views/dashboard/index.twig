@@ -15,66 +15,69 @@
 		</div>
 	</div>
 
+	{% for thing in feed %}
+
 	<div class="list-group"> <!-- Feed item-->
 
 		<div class="row list-group-item clearfix"> <!-- If combined feed -->
 			<div class="row">
 				<div class="col-md-12">
-					Tim Pritlove
+					{{ thing.creator.username }}
 				</div>
 			</div>
 		</div>
 
 		<div class="row list-group-item clearfix">
 			<div class="col-md-12">
-				<h1>Heading of feed item 2</h1>
+				<h1>{{ thing.title }}</h1>
 			</div>
 			<div class="col-sm-2">
-				<img src="http://placekitten.com/150/150" class="img-rounded img-responsive">
+				<img src="/images/things/{{ thing.id }}.jpg" class="img-rounded img-responsive">
 			</div>
 			<div class="col-sm-10">
 				<blockquote>
-					<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-					<p><a href="#">http://www.internet.ninja.com/apost_of_dignity</a></p>
-					<p><small>by Bonq, Sept 19 2013</small></p>
+					<p>{{ thing.description }}</p>
+					<p><a target="_blank" href="{{ thing.url }}">{{ thing.url }}</a></p>
+					<p><small>by {{ thing.creator.username }}, {{ thing.createdAt }}</small></p>
 					<p>
-						<script id='asdasdf'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='http://api.flattr.com/button/view/?uid=bonq&button=compact&url=http%3A%2F%2Fwww.gooasdfasdfgle.com';f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('asdasdf');</script>
+						<script id='thing{{ thing.id }}'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='http://api.flattr.com/button/view/?button=compact&url={{ thing.url|url_encode }}';f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('thing{{ thing.id }}');</script>
 					</p>
 				</blockquote>
 			</div>
 		</div>
-
 	</div> <!-- /Feed item -->
 
-	<div class="list-group"> <!-- Feed item-->
+	{% endfor %}
 
-		<div class="row list-group-item clearfix"> <!-- If combined feed -->
-			<div class="row">
-				<div class="col-md-12">
-					Tim Pritlove
-				</div>
-			</div>
-		</div>
+	{#<div class="list-group"> <!-- Feed item-->#}
 
-		<div class="row list-group-item clearfix">
-			<div class="col-md-12">
-				<h1>Heading of feed item 2</h1>
-			</div>
-			<div class="col-md-2">
-				<img src="http://placekitten.com/150/150" class="img-rounded img-responsive">
-			</div>
-			<div class="col-md-10">
-				<blockquote>
-					<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-					<p><a href="#">http://www.internet.ninja.com/apost_of_dignity</a></p>
-					<p><small>by Bonq, Sept 19 2013</small></p>
-					<p>
-						<script id='asdf'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='http://api.flattr.com/button/view/?uid=bonq&button=compact&url=http%3A%2F%2Fwww.gooasdfasdfgle.com';f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('asdf');</script>
-					</p>
-				</blockquote>
-			</div>
-		</div>
+		{#<div class="row list-group-item clearfix"> <!-- If combined feed -->#}
+			{#<div class="row">#}
+				{#<div class="col-md-12">#}
+					{#Tim Pritlove#}
+				{#</div>#}
+			{#</div>#}
+		{#</div>#}
 
-	</div> <!-- /Feed item -->
+		{#<div class="row list-group-item clearfix">#}
+			{#<div class="col-md-12">#}
+				{#<h1>Heading of feed item 2</h1>#}
+			{#</div>#}
+			{#<div class="col-md-2">#}
+				{#<img src="http://placekitten.com/150/150" class="img-rounded img-responsive">#}
+			{#</div>#}
+			{#<div class="col-md-10">#}
+				{#<blockquote>#}
+					{#<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>#}
+					{#<p><a href="#">http://www.internet.ninja.com/apost_of_dignity</a></p>#}
+					{#<p><small>by Bonq, Sept 19 2013</small></p>#}
+					{#<p>#}
+						{#<script id='asdf'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='http://api.flattr.com/button/view/?uid=bonq&button=compact&url=http%3A%2F%2Fwww.gooasdfasdfgle.com';f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('asdf');</script>#}
+					{#</p>#}
+				{#</blockquote>#}
+			{#</div>#}
+		{#</div>#}
+
+	{#</div> <!-- /Feed item -->#}
 
 {% endblock %}
