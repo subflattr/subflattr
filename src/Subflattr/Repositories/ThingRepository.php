@@ -25,7 +25,7 @@ class ThingRepository extends EntityRepository{
 //		$rsm->addJoinedEntityFromClassMetadata('Subflattr\Entity\User', 'u', 't', 'creator', array('id' => 'user_id', 'description' => 'user_description'));
 
 //		$query = $em->createNativeQuery('select t.* from subscriptions s, things t where s.subscriber = :userId order by t.created_at desc', $rsm);
-		$query = $em->createNativeQuery('select t.* from subscriptions s INNER JOIN things t ON s.subscribedto=t.creator where s.subscriber = :userId order by t.created_at desc', $rsm);
+		$query = $em->createNativeQuery('select t.* from subscriptions s INNER JOIN things t ON s.subscribedto=t.creator where s.subscriber = :userId order by t.created_at desc limit 50', $rsm);
 		$result = $query->execute(['userId' => $userId]);
 
 		return $result;
