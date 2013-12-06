@@ -6,6 +6,7 @@
 	    "symfony/twig-bridge": "~2.3",
 	    "keeguon/oauth2-php": "1.2.2",
 	    "dflydev/doctrine-orm-service-provider": "1.0.2",
+            "doctrine/orm": "*",
 	    "imagine/imagine": "~0.5.0"
     },
 	"autoload": {

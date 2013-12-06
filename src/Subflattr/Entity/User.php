@@ -2,6 +2,7 @@
 
 namespace Subflattr\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -53,14 +54,17 @@ class User {
 	protected $isActive;
 
 	/**
-	 * @OneToMany(targetEntity="Subflattr\Entity\Subscription", mappedBy="subscriber")
+	 * @Column(type="string", length=40, name="rss_token")
 	 */
-	protected $subscriptions;
+	protected $rssToken;
 
 	/**
-	 * @OneToMany(targetEntity="Subflattr\Entity\Subscription", mappedBy="subscribedto")
+	 * @return mixed
 	 */
-	protected $subscribedby;
+	public function getRssToken()
+	{
+		return $this->rssToken;
+	}
 
 	public function getUsername()
 	{
@@ -164,17 +168,17 @@ class User {
 	}
 
 	/**
-	 * @return array|Subscription
+	 * @return string
 	 */
-	public function getSubscriptions()
-	{
-		return $this->subscriptions;
+	public function getToken() {
+		return $this->token;
 	}
 
 	public function toArray()
 	{
 		return [
 			'name' => $this->username,
+			'rss_token' => $this->getRssToken(),
 			'feed' => [
 				'greeting' => $this->greeting,
 				'subheading' => $this->subheading,

@@ -3,6 +3,7 @@
 namespace Subflattr\Auth;
 
 
+use OAuth2\AccessToken;
 use Silex\Application;
 use OAuth2\Client as OAuthClient;
 
@@ -37,8 +38,19 @@ class OAuth {
 		);
 	}
 
+	/**
+	 * @param $code
+	 * @return AccessToken
+	 */
 	public function getAccessTokenByCode($code) {
 		return $this->client->authCode()->getToken($code, array('redirect_uri' => $this->redirectUri, 'parse'=>'json') );
 	}
 
+	/**
+	 * @param $token
+	 * @return AccessToken
+	 */
+	public function getAccessTokenByToken($token) {
+		return new AccessToken($this->client,$token);
+	}
 }

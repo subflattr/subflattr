@@ -15,7 +15,6 @@ class Subscription {
 		$this->subscribedto = $subscribeto->getId();
 	}
 
-
 	/**
 	 * @Id
 	 * @Column(type="integer")
@@ -37,5 +36,13 @@ class Subscription {
 	public function getSubscribedto()
 	{
 		return $this->subscribedto;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getSubscriber()
+	{
+		return $this->subscriber;
 	}
 }

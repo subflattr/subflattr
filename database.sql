@@ -27,9 +27,29 @@ CREATE TABLE `subscriptions` (
   `subscribedto` int(11) NOT NULL,
   PRIMARY KEY (`subscriber`,`subscribedto`),
   KEY `fk_subscribedto` (`subscribedto`),
-  CONSTRAINT `fk_subscriber` FOREIGN KEY (`subscriber`) REFERENCES `users` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_subscribedto` FOREIGN KEY (`subscribedto`) REFERENCES `users` (`id`) ON DELETE CASCADE
+  CONSTRAINT `fk_subscribedto` FOREIGN KEY (`subscribedto`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_subscriber` FOREIGN KEY (`subscriber`) REFERENCES `users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `things`
+--
+
+DROP TABLE IF EXISTS `things`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `things` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `url` text NOT NULL,
+  `title` varchar(200) NOT NULL,
+  `description` text NOT NULL,
+  `creator` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `fk_creator` (`creator`),
+  CONSTRAINT `fk_creator` FOREIGN KEY (`creator`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,7 +70,7 @@ CREATE TABLE `users` (
   `isactive` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `user_id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -62,4 +82,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-10-05 15:14:11
+-- Dump completed on 2013-10-27  2:56:23

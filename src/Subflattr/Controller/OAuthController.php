@@ -27,6 +27,7 @@ class OAuthController {
 			$user->setUsername($response->parse()['username']);
 			$user->setNormalizedUsername(strtolower($response->parse()['username']));
 			$user->setToken($token->getToken());
+			$user->setRssToken(sha1($user->getUsername() . microtime(true)));
 			$app->doctrine()->persist($user);
 			$app->doctrine()->flush();
 		}

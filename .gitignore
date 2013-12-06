@@ -7,3 +7,4 @@ cache
 .DS_Store
 
 web/images/avatars/*
+web/images/things/*

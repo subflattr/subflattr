@@ -4,11 +4,17 @@
 namespace Subflattr\Controller;
 
 
+use Guzzle\Http\Exception\ClientErrorResponseException;
 use Imagine\Gd\Imagine;
 use Imagine\Image\Box;
 use Imagine\Image\Point;
+use Monolog\Logger;
 use Subflattr\Application;
+use Subflattr\Entity\Subscription;
+use Subflattr\Entity\Thing;
 use Subflattr\Entity\User;
+use Subflattr\Model\Flattr;
+use Subflattr\Repositories\SubscriptionRepository;
 use Subflattr\Repositories\UserRepository;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -69,6 +75,95 @@ class CreatorController {
 		$app->doctrine()->persist($user);
 
 		$app->doctrine()->flush();
+
+		return new JsonResponse(['success' => true]);
+	}
+
+	public function submit(Request $request, Application $app) {
+		if(!$app->session()->get('userid'))
+			return $app->redirect('/');
+
+		/** @var UploadedFile $file */
+		$file = $request->files->get('image');
+
+		if(!isset($file))
+			return new JsonResponse(['success' => false, 'status' => 407]);
+
+		if(!($file->getMimeType() == 'image/jpeg' || $file->getMimeType() == 'image/png'))
+			return new JsonResponse(['success' => false, 'status' => 408]);
+
+		/** @var UserRepository $repo */
+		$repo = $app->doctrine()->getRepository('\Subflattr\Entity\User');
+
+		/** @var User $creator */
+		$creator = $repo->find($app->session()->get('userid'));
+		$creatorToken = $app->oauth()->getAccessTokenByToken($creator->getToken());
+
+		$thing = new Thing($request->get('url'), $request->get('title'), $request->get('desc'), $creator);
+		$app->doctrine()->persist($thing);
+
+		$app->log($thing->getId());
+
+
+		$imagine = new Imagine();
+		$image = $imagine->open($file->getRealPath());
+		$maxSize = 300;
+
+		/** @var Box $size */
+		$size = $image->getSize();
+
+		if($size->getHeight() < $maxSize || $size->getWidth() < $maxSize)
+			return new JsonResponse(['success' => false, 'status' => 406]);
+
+		if($size->getWidth() > $maxSize || $size->getHeight() > $maxSize) {
+			$cropStartX = floor(($size->getWidth() - $maxSize) / 2);
+			$cropStartY = floor(($size->getHeight() - $maxSize) / 2);
+
+			if($cropStartX < 0)
+				$cropStartX = 0;
+			if($cropStartY < 0)
+				$cropStartY = 0;
+
+			$image->crop(new Point($cropStartX, $cropStartY), new Box($maxSize, $maxSize));
+		}
+
+		$opts = array(
+			'url' => trim($request->get('url')),
+			'title' => trim($request->get('title')),
+			'description' => trim($request->get('desc')),
+		);
+		try {
+			$response = $creatorToken->post('https://api.flattr.com/rest/v2/things',array('params' => $opts));
+			$parsedResponse = $response->parse();
+		}catch (ClientErrorResponseException $e) {
+			$app->log($e,[],Logger::ERROR);
+			return new JsonResponse(['success' => false, 'status' => 500]);
+		}
+		if($parsedResponse['message'] != 'ok') {
+			$app->log($parsedResponse['description'],[],Logger::ERROR);
+			return new JsonResponse(['success' => false, 'status' => 501, 'message' => $parsedResponse['description']]);
+		}
+
+		$app->doctrine()->flush();
+		$image->save('images/things/' . $thing->getId() . '.jpg');
+
+		$thingId = $parsedResponse['id'];
+		$app->log(sprintf("Successfully created new Thing %s for User %s", $thingId, $creator->getUsername()));
+
+		$client= new \GearmanClient();
+		$client->addServer();
+
+		/** @var SubscriptionRepository $subRepo */
+		$subRepo = $app->doctrine()->getRepository('\Subflattr\Entity\Subscription');
+
+		$subscriptions = $subRepo->findBy(
+			['subscribedto' => $creator->getId()]
+		);
+
+		/** @var $subscription Subscription */
+		foreach($subscriptions AS $subscription) {
+			$client->doBackground("flattr", serialize(new Flattr($thingId, $subscription->getSubscriber())));
+		}
 
 		return new JsonResponse(['success' => true]);
 	}
