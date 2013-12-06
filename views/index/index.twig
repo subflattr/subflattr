@@ -17,51 +17,29 @@
 	</div>
 {% endblock %}
 {% block content %}
-	<div class="col-sm-6">
-		<a href="#">
-			<div class="well well-sm clearfix white_back">
-				<div class="col-sm-4 frontpage_tumb">
-					<img src="http://placekitten.com/200/200" class="img-rounded img-responsive">
+
+	{% for user in frontpageUsers %}
+		{% if loop.index is odd %}
+			<div class="row">
+		{% endif %}
+		<div class="col-sm-6">
+			<a href="/profile/{{ user.username|lower }}">
+				<div class="well well-sm clearfix white_back">
+					<div class="col-sm-4 frontpage_tumb">
+						<img src="/images/avatars/{{ user.username|lower }}.jpg" class="img-rounded img-responsive">
+					</div>
+					<div class="col-sm-8">
+						<h2>{{ user.username }}</h2>
+						<h4>{{ user.greeting }}</h4>
+						<h4>{{ user.description }}</h4>
+						<h4><span class="label label-primary">{{ user.counter }} subscribers</span></h4>
+					</div>
 				</div>
-				<div class="col-sm-8">
-					<h2>Hi, I'm Bonq!</h2>
-					<h4>I create chiptunes and blip hop!</h4>
-					<h4><span class="label label-primary">1337 subscribers</span></h4>
-				</div>
+			</a>
+		</div>
+		{% if loop.index is even %}
 			</div>
-		</a>
-	</div>
-
-
-	<div class="col-sm-6">
-		<a href="#">
-			<div class="well well-sm clearfix white_back">
-				<div class="col-sm-4 frontpage_tumb">
-					<img src="http://placekitten.com/200/200" class="img-rounded img-responsive">
-				</div>
-				<div class="col-sm-8">
-					<h2>Hi, I'm Bonq!</h2>
-					<h4>I create chiptunes and blip hop!</h4>
-					<h4><span class="label label-primary">1337 subscribers</span></h4>
-				</div>
-			</div>
-		</a>
-	</div>
-
-
-	<div class="col-sm-6">
-		<a href="#">
-			<div class="well well-sm clearfix white_back">
-				<div class="col-sm-4 frontpage_tumb">
-					<img src="http://placekitten.com/200/200" class="img-rounded img-responsive">
-				</div>
-				<div class="col-sm-8">
-					<h2>Hi, I'm Bonq!</h2>
-					<h4>I create chiptunes and blip hop!</h4>
-					<h4><span class="label label-primary">1337 subscribers</span></h4>
-				</div>
-			</div>
-		</a>
-	</div>
+		{% endif %}
+	{% endfor %}
 
 {% endblock %}
