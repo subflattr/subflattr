@@ -29,10 +29,7 @@ start gearman worker with `php worker.php`
 
 TODO
 ----
-* "My subscriptions" menu
 * Wallpaper saving in profile
-* "Discover creators" page
-
 
 Licence
 -------
