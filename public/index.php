@@ -44,7 +44,8 @@ $app->register(new DoctrineOrmServiceProvider, array(
 ));
 $app->register(new Silex\Provider\SessionServiceProvider());
 
-$app->get('/', 'Subflattr\Controller\IndexController::foobar');
+$app->get('/', 'Subflattr\Controller\IndexController::index');
+$app->get('/about/', 'Subflattr\Controller\IndexController::about');
 $app->get('/oauth/', 'Subflattr\Controller\OAuthController::authorize');
 $app->get('/dashboard/', 'Subflattr\Controller\DashboardController::index');
 $app->get('/profile/{name}', 'Subflattr\Controller\ProfileController::show');

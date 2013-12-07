@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class IndexController
 {
-    public function foobar(Request $request, Application $app)
+    public function index(Request $request, Application $app)
     {
 	    $rendervars = [
 		    'loggedin' => $app->isLoggedIn(),
@@ -30,4 +30,19 @@ class IndexController
 
 	    return $app->render('index/index.twig', $rendervars);
     }
+
+	public function about(Request $request, Application $app) {
+		$rendervars = [
+			'loggedin' => $app->isLoggedIn(),
+		];
+
+		if($app->isLoggedIn())
+			$rendervars['user'] = $app->getUserData();
+		else
+			$rendervars['oauthlink'] = $app->oauth()->getAuthuri();
+
+
+		return $app->render('index/about.twig', $rendervars);
+
+	}
 }
