@@ -66,6 +66,14 @@ class User {
 		return $this->rssToken;
 	}
 
+	/**
+	 * @param mixed $rssToken
+	 */
+	public function setRssToken($rssToken)
+	{
+		$this->rssToken = $rssToken;
+	}
+
 	public function getUsername()
 	{
 		return $this->username;
